@@ -1,0 +1,140 @@
+
+INSTALL CONDA ENV
+Run command:
+conda env update --file env_gpu.yml
+You should see
+done
+#
+# To activate this environment, use
+#
+#     $ conda activate CbrainCustomLayer
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+conda env update --file env_cpu.yml
+You should see
+done
+#
+# To activate this environment, use
+#
+#     $ conda activate Griffin_cpu
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+To check the conda env list
+conda env list
+# conda environments:
+#
+CbrainCustomLayer        /home/liran/anaconda3/envs/CbrainCustomLayer
+Griffin_cpu              /home/liran/anaconda3/envs/Griffin_cpu
+
+
+RUN JUPYTER NOTEBOOK ON FRONTERA
+
+Define some alias 
+
+On frontera
+alias init_debug='idev -N 1 -A ATM20009 -p development -t 02:00:00'
+
+On local machine
+alias front='ssh -XY  tg863871@frontera.tacc.utexas.edu'
+
+Open two terminals both of them need to log in Frontera
+
+Step 1: <On local machine> Log in Frontera: 
+        (base) liranpeng@PLR:~$ front
+
+Step 2: <On Frontera>Start a development queue: 
+(base) tg863871@login2:[~]: init_debug
+
+ NOTE: "->" are idev statements. "-->" are TACC/SLURM filter statements.
+
+
+
+ -> Checking on the status of development queue. OK
+
+ -> Defaults file    : ~/.idevrc    
+ -> System           : frontera     
+ -> Queue            : development    (cmd line: -p        )
+ -> Nodes            : 1              (cmd line: -N        )
+ -> Tasks per Node   : 56             (Queue default       )
+ -> Time (hh:mm:ss)  : 02:00:00       (cmd line: -t        )
+ -> Project          : ATM20009       (cmd line: -A        )
+
+-----------------------------------------------------------------
+           Welcome to the Frontera Supercomputer                 
+-----------------------------------------------------------------
+
+No reservation for this job
+--> Verifying valid submit host (login2)...OK
+--> Verifying valid jobname...OK
+--> Verifying valid ssh keys...OK
+--> Verifying access to desired queue (development)...OK
+--> Checking available allocation (ATM20009)...OK
+--> Warning: filesystem /home1/07088/tg863871 is over 90% allocated.
+-->          Please, keep /home1/07088/tg863871 under 90% of quota allocation
+--> Verifying that quota for filesystem /work/07088/tg863871/frontera is at 59.29% allocated...OK
+Submitted batch job 2664277
+
+ -> After your idev job begins to run, a command prompt will appear,
+ -> and you can begin your interactive development session. 
+ -> We will report the job status every 4 seconds: (PD=pending, R=running).
+
+ -> job status:  PD
+ -> job status:  PD
+ -> job status:  PD
+ -> job status:  PD
+ -> job status:  PD
+ -> job status:  PD
+ -> job status:  PD
+ -> job status:  PD
+ -> job status:  PD
+ -> job status:  PD
+ -> job status:  PD
+ -> job status:  PD
+ -> job status:  R
+
+ -> Job is now running on masternode= c204-029...OK
+ -> Sleeping for 7 seconds...OK
+ -> Checking to make sure your job has initialized an env for you....OK
+ -> Creating interactive terminal session (login) on master node c204-029.
+
+ssh -Y -A -o StrictHostKeyChecking no c204-029
+Last login: Wed Mar 10 00:36:57 2021 from login2.frontera.tacc.utexas.edu
+TACC Frontera System
+Provisioned on 22-Dec-2020 at 10:34
+
+
+Step 3: <Frontera Development queue> Start jupyter notebook
+(base) c204-029[clx](1001)$ module unload pythone
+(base) c204-029[clx](1002)$ conda activate Griffin_cpu
+(Griffin_cpu) c204-029[clx](1003)$ jupyter notebook --port 2020
+[I 02:33:30.306 NotebookApp] Writing notebook server cookie secret to /run/user/863871/jupyter/notebook_cookie_secret
+[I 02:33:34.419 NotebookApp] [jupyter_nbextensions_configurator] enabled 0.4.1
+[I 02:33:34.419 NotebookApp] Serving notebooks from local directory: /home1/07088/tg863871
+[I 02:33:34.419 NotebookApp] The Jupyter Notebook is running at:
+[I 02:33:34.419 NotebookApp] http://localhost:2020/?token=6807c5fd7b24853cc2b5e766bf27775afeb15972833d1c2e
+[I 02:33:34.419 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 02:33:34.669 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///run/user/863871/jupyter/nbserver-220472-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:2020/?token=6807c5fd7b24853cc2b5e766bf27775afeb15972833d1c2e
+START /bin/firefox "/run/user/863871/jupyter/nbserver-220472-open.html"
+Failed to open connection to "session" message bus: Using X11 for dbus-daemon autolaunch was disabled at compile time, set your DBUS_SESSION_BUS_ADDRESS instead
+Running without a11y support!
+Error: cannot open display: localhost:10.0
+xdg-open: no method available for opening 'file:///run/user/863871/jupyter/nbserver-220472-open.html'        
+
+Step 4: <On the second terminal>
+        ssh -L localhost:2020:localhost:2020 tg863871@c204-029
+   
+Step 5: Start browser and copy the URLs
+        http://localhost:2020/?token=6807c5fd7b24853cc2b5e766bf27775afeb15972833d1c2e
+       
+
