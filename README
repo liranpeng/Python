@@ -2,18 +2,7 @@
 
 --------------------------------------------------------------------
 INSTALL CONDA ENV
-Run command:
-conda env update --file env_gpu.yml
-You should see
-done
-#
-# To activate this environment, use
-#
-#     $ conda activate CbrainCustomLayer
-#
-# To deactivate an active environment, use
-#
-#     $ conda deactivate
+Run the following commands on Frontera:
 
 conda env update --file env_cpu.yml
 You should see
@@ -31,23 +20,26 @@ To check the conda env list
 conda env list
 # conda environments:
 #
-CbrainCustomLayer        /home/liran/anaconda3/envs/CbrainCustomLayer
 Griffin_cpu              /home/liran/anaconda3/envs/Griffin_cpu
 
+May also need to install the following packages in addition to Griffin_cpu:
+conda activate Griffin_cpu
+conda install -c conda-forge ffmpeg
+conda install x264=='1!152.20180717' ffmpeg=4.0.2 -c conda-forge
 
-RUN JUPYTER NOTEBOOK ON FRONTERA
-
-Define some alias 
-
-On frontera
-alias init_debug='idev -N 1 -A ATM20009 -p development -t 02:00:00'
+--------------------------------------------------------------------
+DEFINE ALIAS
 
 On local machine
 alias front='ssh -XY  tg863871@frontera.tacc.utexas.edu'
 alias jup_frontera='ssh -L localhost:XXXX:localhost:XXXX tg863871@frontera.tacc.utexas.edu'
 Note: XXXX is the port number for jupyter notebook
 
+On frontera
+alias init_debug='idev -N 1 -A ATM20009 -p development -t 02:00:00'
+
 --------------------------------------------------------------------
+START JUPYTER NOTEBOOK
 --------------------------------------------------------------------
 Open two terminals both of them need to log in Frontera
 
@@ -94,25 +86,14 @@ Submitted batch job 2664277
  -> We will report the job status every 4 seconds: (PD=pending, R=running).
 
  -> job status:  PD
- -> job status:  PD
- -> job status:  PD
- -> job status:  PD
- -> job status:  PD
- -> job status:  PD
- -> job status:  PD
- -> job status:  PD
- -> job status:  PD
- -> job status:  PD
- -> job status:  PD
- -> job status:  PD
  -> job status:  R
 
- -> Job is now running on masternode= c204-029...OK
+ -> Job is now running on masternode= cYYY-ZZZ...OK
  -> Sleeping for 7 seconds...OK
  -> Checking to make sure your job has initialized an env for you....OK
- -> Creating interactive terminal session (login) on master node c204-029.
+ -> Creating interactive terminal session (login) on master node cYYY-ZZZ.
 
-ssh -Y -A -o StrictHostKeyChecking no c204-029
+ssh -Y -A -o StrictHostKeyChecking no cYYY-ZZZ
 Last login: Wed Mar 10 00:36:57 2021 from login2.frontera.tacc.utexas.edu
 TACC Frontera System
 Provisioned on 22-Dec-2020 at 10:34
