@@ -141,9 +141,10 @@ Error: cannot open display: localhost:10.0
 xdg-open: no method available for opening 'file:///run/user/863871/jupyter/nbserver-220472-open.html'        
 
 Step 4: <On the second terminal>
-		jup_frontera 
+		jup_frontera <OR type ssh -L localhost:XXXX:localhost:XXXX tg863871@frontera.tacc.utexas.edu>
         ssh -L localhost:XXXX:localhost:XXXX tg863871@cYYY-ZZZ
-        Note: Please check YYY and ZZZ from the development queue
+        Note: where  YYY-ZZZ is the identifier of the idev-triggered node
+        	  Also replace tg863871 to your username
    
 Step 5: Start browser and copy the URLs
         http://localhost:XXXX/?token=6807c5fd7b24853cc2b5e766bf27775afeb15972833d1c2e
