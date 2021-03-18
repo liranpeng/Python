@@ -130,4 +130,25 @@ Step 4: <On the second terminal>
 Step 5: Start browser and copy the URLs
         http://localhost:XXXX/?token=6807c5fd7b24853cc2b5e766bf27775afeb15972833d1c2e
        
+--------------------------------------------------------------------
+Programs in this package:
 
+Process_CRM_Modelout.ipynb 
+Plot CRM variable animation for single GCM column
+
+Process_Crosssection.ipynb
+Plot cross section animation for giving start lon/lat and end lon/lat
+
+Process_Logfile.ipynb
+Read CRM time information and also to predict the best number of MPI tasks for any GCM grid. This program is used for 2CRM approach
+
+Process_Model_3D.ipynb
+<Not done yet> Plot the map of 3D variables at a giving pressure level
+
+Process_compare_CERES.ipynb
+Compare model results with CERES data
+
+pritch_sandbox_v3.ipynb
+pritch_sandbox_v2.ipynb
+pritch_sandbox_v1.ipynb
+Test programs from Mike  
